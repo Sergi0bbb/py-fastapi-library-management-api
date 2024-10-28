@@ -5,10 +5,10 @@ from typing import Optional, List
 import schemas
 from crud import (
     get_all_authors,
-    create_author,
+    create_author as crud_create_author,
     get_author_detail,
     get_all_books,
-    create_book,
+    create_book as crud_create_book,
 )
 from database import get_db
 from settings import API_PREFIX
@@ -34,11 +34,11 @@ def read_all_authors(
 
 
 @app.post(API_PREFIX + "authors/", response_model=schemas.Author)
-def create_author(
+def create_author_route(
         author: schemas.AuthorCreate,
         db: Session = Depends(get_db)
 ) -> schemas.Author:
-    return create_author(db=db, author=author)
+    return crud_create_author(db=db, author=author)
 
 
 @app.get(API_PREFIX + "authors/{id}/", response_model=schemas.Author)
@@ -62,8 +62,8 @@ def read_all_books(
 
 
 @app.post(API_PREFIX + "books/", response_model=schemas.Book)
-def create_book(
+def create_book_route(
         book: schemas.BookCreate,
         db: Session = Depends(get_db)
 ) -> schemas.Book:
-    return create_book(db=db, book=book)
+    return crud_create_book(db=db, book=book)

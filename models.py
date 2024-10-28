@@ -19,6 +19,6 @@ class Book(BaseModel):
     title = Column(String(255), nullable=False)
     summary = Column(String(500), nullable=False)
     publication_date = Column(Date(), nullable=False)
-    author_id = Column(Integer, ForeignKey("author.id"))
+    author_id = Column(Integer, ForeignKey("author.id"), nullable=False)
 
     author = relationship(Author)
