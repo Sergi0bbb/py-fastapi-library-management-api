@@ -6,8 +6,8 @@ from fastapi import HTTPException
 
 def get_all_authors(
         db: Session,
-        skip: int | None = None,
-        limit: int | None = None,
+        skip: int,
+        limit: int,
 ) -> list[models.Author]:
     query = db.query(models.Author)
     if limit:
@@ -41,9 +41,9 @@ def get_author_detail(db: Session, id: int) -> models.Author:
 
 def get_all_books(
         db: Session,
-        skip: int | None = None,
-        limit: int | None = None,
-        author_id: int | None = None,
+        skip: int,
+        limit: int,
+        author_id: int,
 ) -> list[models.Book]:
     query = db.query(models.Book)
     if author_id:
